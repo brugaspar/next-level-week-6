@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import AppLoading from "expo-app-loading";
+import { StatusBar } from "react-native";
+import { Rajdhani_500Medium, Rajdhani_700Bold } from "@expo-google-fonts/rajdhani";
+import { Inter_400Regular, Inter_500Medium, useFonts } from "@expo-google-fonts/inter";
+
+import { Background } from "./src/components/Background";
+
+import { Routes } from "./src/routes";
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Rajdhani_500Medium,
+    Rajdhani_700Bold,
+    Inter_400Regular,
+    Inter_500Medium
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Background>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+
+      <Routes />
+    </Background>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
